@@ -15,6 +15,9 @@
     </config-file>
 
     <source-file src="src/android/BaiduTrace.java" target-dir="src/com/bingofresh/plugins/baidutrace" />
+    <source-file src="src/android/libs/armeabi/libBaiduTraceSDK_v2_1_1.so" target-dir="libs/armeabi" />
+    <source-file src="src/android/libs/armeabi-v7a/libBaiduTraceSDK_v2_1_1.so" target-dir="libs/armeabi-v7a" />
+    <source-file src="src/android/libs/BaiduTraceSDK_v2_1_1.jar" target-dir="libs" />
 
 <!--
     <source-file src="src/android/w3/Coordinates.java" target-dir="src/com/eteng/geolocation/w3" />
