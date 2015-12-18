@@ -37,7 +37,7 @@ LBSTraceClient client = new LBSTraceClient(ctx);
 //鹰眼服务ID
 long serviceId  = 105386; //开发者创建的鹰眼服务ID
 //entity标识
-String entityName = "mycar";
+String entityName = options.get("entityName").toString();
 //轨迹服务类型（0 : 不上传位置数据，也不接收报警信息； 1 : 不上传位置数据，但接收报警信息；2 : 上传位置数据，且接收报警信息）
 int  traceType = 2;
 //实例化轨迹服务
