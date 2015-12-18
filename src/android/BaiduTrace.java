@@ -1,4 +1,4 @@
-package com.bingofresh.plugins.baidutrace;
+package com.xuehexi.hello;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;

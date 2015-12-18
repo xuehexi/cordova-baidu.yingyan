@@ -10,11 +10,11 @@
 
     <config-file target="res/xml/config.xml" parent="/*">
       <feature name="BaiduTrace">
-        <param name="android-package" value="com.bingofresh.plugins.baidutrace.BaiduTrace" />
+        <param name="android-package" value="com.xuehexi.hello.BaiduTrace" />
       </feature>
     </config-file>
 
-    <source-file src="src/android/BaiduTrace.java" target-dir="src/com/bingofresh/plugins/baidutrace" />
+    <source-file src="src/android/BaiduTrace.java" target-dir="src/com/xuehexi/hello" />
     <source-file src="src/android/libs/armeabi/libBaiduTraceSDK_v2_1_1.so" target-dir="libs/armeabi" />
     <source-file src="src/android/libs/armeabi-v7a/libBaiduTraceSDK_v2_1_1.so" target-dir="libs/armeabi-v7a" />
     <source-file src="src/android/libs/BaiduTraceSDK_v2_1_1.jar" target-dir="libs" />
