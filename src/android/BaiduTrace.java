@@ -14,13 +14,13 @@ import android.util.SparseArray;
 public class BaiduTrace extends CordovaPlugin {
   @Override
   public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-    Log.i(TAG, "插件调用");
+    //Log.i(, "插件调用");
     JSONObject options = new JSONObject();
     if (action.equals("startTrace")) {
       try {
         options = args.getJSONObject(0);
       } catch (JSONException e) {
-        Log.v(TAG, "options 未传入");
+        //Log.v(TAG, "options 未传入");
       }
       callbackContext.success("1234567");
       //return getCurrentPosition(options, callbackContext);
