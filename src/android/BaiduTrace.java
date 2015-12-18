@@ -12,18 +12,20 @@ import android.util.Log;
 import android.util.SparseArray;
 
 public class BaiduTrace extends CordovaPlugin {
-
-	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        Activity activity = this.cordova.getActivity();
-        if (action.equals("startTrace")) {
-            Intent i = activity.getIntent();
-            if (i.hasExtra(Intent.EXTRA_TEXT)) {
-                callbackContext.success(i.getStringExtra(Intent.EXTRA_TEXT));
-            } else {
-                callbackContext.error("");
-            }
-            return true;
-        }
-        return false;
-    }
+  @Override
+  public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+    Log.i(TAG, "插件调用");
+    JSONObject options = new JSONObject();
+    if (action.equals("startTrace")) {
+      try {
+        options = args.getJSONObject(0);
+      } catch (JSONException e) {
+        Log.v(TAG, "options 未传入");
+      }
+      callbackContext.success("1234567");
+      //return getCurrentPosition(options, callbackContext);
+      return true;
+    } 
+    return false;
+  }
 }
