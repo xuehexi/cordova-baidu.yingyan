@@ -1,7 +1,10 @@
-package com.bingofresh.map;
+package com.bingofresh.plugins.baidutrace;
 
-public class BaiduTrace {
-	public String startTrace(String options) {
-	    return "ok";
+
+
+public class BaiduTrace  {
+
+	public String startTrace(String test) {
+    	return "abc";
   	}
 }
