@@ -9,6 +9,6 @@ var baiduyingyan = module.exports = {};
 var idGenerator = 0;
 
 
-baiduyingyan.getExtra = function(success, error) {
+baiduyingyan.startTrace = function(success, error) {
     exec(success, error, SERVICE_NAME, ACTION_START_TRACE, []);
 };
