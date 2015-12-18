@@ -31,9 +31,9 @@ public class BaiduTrace extends CordovaPlugin {
       } catch (JSONException e) {
         //Log.v(TAG, "options 未传入");
       }
-
+Context ctx = cordova.getActivity().getApplicationContext();
 //实例化轨迹服务客户端
-LBSTraceClient client = new LBSTraceClient(getApplicationContext());
+LBSTraceClient client = new LBSTraceClient(ctx);
 //鹰眼服务ID
 long serviceId  = 105386; //开发者创建的鹰眼服务ID
 //entity标识
@@ -41,7 +41,7 @@ String entityName = "mycar";
 //轨迹服务类型（0 : 不上传位置数据，也不接收报警信息； 1 : 不上传位置数据，但接收报警信息；2 : 上传位置数据，且接收报警信息）
 int  traceType = 2;
 //实例化轨迹服务
-Trace trace = new Trace(getApplicationContext(), serviceId, entityName, traceType);
+Trace trace = new Trace(ctx, serviceId, entityName, traceType);
 //实例化开启轨迹服务回调接口
 OnStartTraceListener  startTraceListener = new OnStartTraceListener() {       
     //开启轨迹服务回调接口（arg0 : 消息编码，arg1 : 消息内容，详情查看类参考）
