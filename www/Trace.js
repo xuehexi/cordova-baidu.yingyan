@@ -9,6 +9,7 @@ var baiduyingyan = module.exports = {};
 var idGenerator = 0;
 
 baiduyingyan.startTrace = function (success, error, options) {
+  return options;
   if (typeof sucess === 'object') {
     options = success;
   }
