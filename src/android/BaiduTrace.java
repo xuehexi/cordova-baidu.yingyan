@@ -22,7 +22,7 @@ import com.baidu.trace.OnEntityListener;
 
 public class BaiduTrace extends CordovaPlugin {
   @Override
-  public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+  public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
     //Log.i(, "插件调用");
     JSONObject options = new JSONObject();
     if (action.equals("startTrace")) {
@@ -46,7 +46,7 @@ Trace trace = new Trace(ctx, serviceId, entityName, traceType);
 OnStartTraceListener  startTraceListener = new OnStartTraceListener() {       
     //开启轨迹服务回调接口（arg0 : 消息编码，arg1 : 消息内容，详情查看类参考）
      @Override
-     public void onTraceCallback(int arg0, final String arg1) {
+     public void onTraceCallback(int arg0,  String arg1) {
      	callbackContext.success(arg1);             
      }
     //轨迹服务推送接口（用于接收服务端推送消息，arg0 : 消息类型，arg1 : 消息内容，详情查看类参考）
