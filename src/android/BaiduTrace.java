@@ -21,7 +21,9 @@ import com.baidu.trace.OnEntityListener;
 
 
 public class BaiduTrace extends CordovaPlugin {
-  @Override
+  private LBSTraceClient client;
+  private Trace trace;
+  @Override 
   public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
     //Log.i(, "插件调用");
     JSONObject options = new JSONObject();
@@ -31,38 +33,53 @@ public class BaiduTrace extends CordovaPlugin {
       } catch (JSONException e) {
         //Log.v(TAG, "options 未传入");
       }
-Context ctx = cordova.getActivity().getApplicationContext();
-//实例化轨迹服务客户端
-LBSTraceClient client = new LBSTraceClient(ctx);
-//鹰眼服务ID
-long serviceId  = 105386; //开发者创建的鹰眼服务ID
-//entity标识
-String entityName = options.getString("entityName");
-//轨迹服务类型（0 : 不上传位置数据，也不接收报警信息； 1 : 不上传位置数据，但接收报警信息；2 : 上传位置数据，且接收报警信息）
-int  traceType = 2;
-//实例化轨迹服务
-Trace trace = new Trace(ctx, serviceId, entityName, traceType);
-//实例化开启轨迹服务回调接口
-OnStartTraceListener  startTraceListener = new OnStartTraceListener() {       
-    //开启轨迹服务回调接口（arg0 : 消息编码，arg1 : 消息内容，详情查看类参考）
-     @Override
-     public void onTraceCallback(int arg0,  String arg1) {
-     	callbackContext.success(arg1);             
-     }
-    //轨迹服务推送接口（用于接收服务端推送消息，arg0 : 消息类型，arg1 : 消息内容，详情查看类参考）
-     @Override
-     public void onTracePushCallback(byte arg0, String arg1) {
-     }
-};
-//开启轨迹服务
-client.startTrace(trace, startTraceListener);
-
-
-
-      
+		Context ctx = cordova.getActivity().getApplicationContext();
+		//实例化轨迹服务客户端
+		client = new LBSTraceClient(ctx);
+		//鹰眼服务ID
+		long serviceId  = options.getLong("serviceId"); //开发者创建的鹰眼服务ID
+		//entity标识
+		String entityName = options.getString("entityName");
+		//轨迹服务类型（0 : 不上传位置数据，也不接收报警信息； 1 : 不上传位置数据，但接收报警信息；2 : 上传位置数据，且接收报警信息）
+		int  traceType = 2;
+		//实例化轨迹服务
+		trace = new Trace(ctx, serviceId, entityName, traceType);
+		//实例化开启轨迹服务回调接口
+		OnStartTraceListener  startTraceListener = new OnStartTraceListener() {       
+		    //开启轨迹服务回调接口（arg0 : 消息编码，arg1 : 消息内容，详情查看类参考）
+		     @Override
+		     public void onTraceCallback(int arg0,  String arg1) {
+		     	callbackContext.success(arg1);             
+		     }
+		    //轨迹服务推送接口（用于接收服务端推送消息，arg0 : 消息类型，arg1 : 消息内容，详情查看类参考）
+		     @Override
+		     public void onTracePushCallback(byte arg0, String arg1) {
+		     }
+		};
+		//开启轨迹服务
+		client.startTrace(trace, startTraceListener);
       //return getCurrentPosition(options, callbackContext);
       return true;
-    } 
+    }
+    if (action.equals("stopTraceListener")){
+    		if (client==null || trace==null){
+    			return false;
+    		}
+    		//实例化停止轨迹服务回调接口
+			OnStopTraceListener stopTraceListener = new OnStopTraceListener(){
+			     // 轨迹服务停止成功
+			     @Override
+			      public void onStopTraceSuccess() {
+			      }
+			      // 轨迹服务停止失败（arg0 : 错误编码，arg1 : 消息内容，详情查看类参考）
+			      @Override
+			       public void onStopTraceFailed(int arg0, String arg1) {
+			       }
+			};
+			 
+			//停止轨迹服务
+			client.stopTrace(trace,stopTraceListener);
+    }
     return false;
   }
 }
